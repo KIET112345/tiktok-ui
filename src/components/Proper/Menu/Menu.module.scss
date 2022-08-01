@@ -1,0 +1,20 @@
+//menu wrapper
+.menu-list {
+    width: 240px;
+    .menu-item {
+        margin-left: 0;
+    }
+}
+
+.menu-popper {
+    margin-bottom: 8px;
+}
+//menu item
+.menu-item {
+    width: 100%;
+    justify-content: flex-start;
+    padding: 11px 16px;
+    &:hover {
+        background: rgba(22, 24, 35, 0.03);
+    }
+}

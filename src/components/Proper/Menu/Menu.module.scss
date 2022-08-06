@@ -7,6 +7,7 @@
 }
 
 .menu-popper {
+    padding: 0;
     margin-bottom: 8px;
 }
 //menu item
@@ -14,7 +15,30 @@
     width: 100%;
     justify-content: flex-start;
     padding: 11px 16px;
+    border-radius: 0;
+    line-height: 1.8rem;
     &:hover {
         background: rgba(22, 24, 35, 0.03);
     }
+}
+
+//header
+.header {
+    height: 50px;
+    position: relative;
+    margin-top: -8px;
+}
+
+.back-btn {
+    height: 100%;
+    width: 50px;
+    background-color: transparent;
+    cursor: pointer;
+}
+
+.header-title {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
 }

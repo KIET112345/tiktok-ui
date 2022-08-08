@@ -8,7 +8,7 @@
     --default-layout-horizontal-spacer: 24px;
 
     --black: #000;
-    --text-color: #333;
+    --text-color: #161823;
     --white: #fff;
 }
 * {
@@ -35,4 +35,30 @@ input,
 a[href] {
     text-decoration: none;
     color: var(--text-color);
+}
+
+//custom tooltips
+body {
+    .tippy-box {
+        border-radius: 8px;
+        font-weight: 600;
+        font-size: 1.6rem;
+        line-height: 2.2rem;
+        background-color: rgba(84, 84, 84, 0.92);
+        .tippy-content {
+            position: relative;
+            padding: 8px 9px;
+            z-index: 1;
+        }
+    }
+    .tippy-arrow {
+        color: rgba(84, 84, 84, 0.92);
+    }
+    .tippy-box[data-placement^='bottom'] > .tippy-arrow:before {
+        top: -8px;
+        left: 0;
+        border-width: 0 8px 8px;
+        border-bottom-color: initial;
+        transform-origin: center bottom;
+    }
 }

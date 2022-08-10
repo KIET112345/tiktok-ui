@@ -9,6 +9,7 @@ import { Wrapper as ProperWrapper } from '~/components/Proper';
 import AccountItem from '~/components/AccountItem';
 import styles from './Search.module.scss';
 import { SearchIcon } from '~/components/Icons';
+import { useDebounce } from '~/hook';
 
 const cx = classNames.bind(styles);
 function Search() {
@@ -19,14 +20,16 @@ function Search() {
 
     const inputRef = useRef();
 
+    const debounced = useDebounce(searchValue, 500);
+
     useEffect(() => {
-        if (!searchValue.trim()) {
+        if (!debounced.trim()) {
             setSearchResults([]);
             return;
         }
         setLoading(true);
         setTimeout(() => {
-            fetch(`https://tiktok.fullstack.edu.vn/api/users/search?q=${encodeURIComponent(searchValue)}&type=less`)
+            fetch(`https://tiktok.fullstack.edu.vn/api/users/search?q=${encodeURIComponent(debounced)}&type=less`)
                 .then((res) => res.json())
                 .then((res) => {
                     setSearchResults(res.data);
@@ -36,7 +39,7 @@ function Search() {
                     setLoading(true);
                 });
         }, 3000);
-    }, [searchValue]);
+    }, [debounced]);
 
     const handleClear = () => {
         setSearchValue('');

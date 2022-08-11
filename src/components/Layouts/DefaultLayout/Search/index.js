@@ -23,6 +23,18 @@ function Search() {
 
     const debounced = useDebounce(searchValue, 500);
 
+    const handleChange = (e) => {
+        const searchValue = e.target.value;
+        if (searchValue.startsWith(' ')) {
+            return;
+        }
+        setSearchValue(e.target.value);
+    };
+
+    const handleSubmit = (e) => {
+        e.preventDefault();
+    };
+
     useEffect(() => {
         if (!debounced.trim()) {
             setSearchResults([]);
@@ -70,7 +82,7 @@ function Search() {
                     value={searchValue}
                     placeholder="Search accounts and videos"
                     spellCheck={false}
-                    onChange={(e) => setSearchValue(e.target.value)}
+                    onChange={handleChange}
                     onFocus={() => {
                         setShowResult(true);
                     }}
@@ -81,7 +93,7 @@ function Search() {
                     </button>
                 )}
                 {loading && <FontAwesomeIcon className={cx('loading')} icon={faSpinner} />}
-                <button className={cx('search-btn')}>
+                <button className={cx('search-btn')} onMouseDown={handleSubmit}>
                     <SearchIcon />
                 </button>
             </div>

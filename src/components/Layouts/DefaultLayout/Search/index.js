@@ -61,43 +61,49 @@ function Search() {
     };
 
     return (
-        <HeadlesTippy
-            interactive={true}
-            visible={showResult && searchResults.length > 0}
-            render={(attrs) => (
-                <div className={cx('search-results')} tabIndex="-1" {...attrs}>
-                    <ProperWrapper>
-                        <h4 className={cx('search-title')}>Accounts</h4>
-                        {searchResults.map((result) => {
-                            return <AccountItem key={result.id} data={result} />;
-                        })}
-                    </ProperWrapper>
-                </div>
-            )}
-            onClickOutside={handleHideResult}
-        >
-            <div className={cx('search')}>
-                <input
-                    ref={inputRef}
-                    value={searchValue}
-                    placeholder="Search accounts and videos"
-                    spellCheck={false}
-                    onChange={handleChange}
-                    onFocus={() => {
-                        setShowResult(true);
-                    }}
-                />
-                {!!searchValue && !loading && (
-                    <button className={cx('clear')} onClick={handleClear}>
-                        <FontAwesomeIcon icon={faCircleXmark} />
-                    </button>
+        // fix warnong tippy: Interactive tippy element may not be accessible via keyboard navigation because it is not directly after the reference element in the DOM source order.
+        //Using a wrapper <div> or <span> tag around the reference element solves this by creating a new parentNode context.
+        // Specifying `appendTo: document.body` silences this warning, but it assumes you are using a focus management solution to handle keyboard navigation.
+        <div>
+            <HeadlesTippy
+                interactive={true}
+                appendTo={() => document.body}
+                visible={showResult && searchResults.length > 0}
+                render={(attrs) => (
+                    <div className={cx('search-results')} tabIndex="-1" {...attrs}>
+                        <ProperWrapper>
+                            <h4 className={cx('search-title')}>Accounts</h4>
+                            {searchResults.map((result) => {
+                                return <AccountItem key={result.id} data={result} />;
+                            })}
+                        </ProperWrapper>
+                    </div>
                 )}
-                {loading && <FontAwesomeIcon className={cx('loading')} icon={faSpinner} />}
-                <button className={cx('search-btn')} onMouseDown={handleSubmit}>
-                    <SearchIcon />
-                </button>
-            </div>
-        </HeadlesTippy>
+                onClickOutside={handleHideResult}
+            >
+                <div className={cx('search')}>
+                    <input
+                        ref={inputRef}
+                        value={searchValue}
+                        placeholder="Search accounts and videos"
+                        spellCheck={false}
+                        onChange={handleChange}
+                        onFocus={() => {
+                            setShowResult(true);
+                        }}
+                    />
+                    {!!searchValue && !loading && (
+                        <button className={cx('clear')} onClick={handleClear}>
+                            <FontAwesomeIcon icon={faCircleXmark} />
+                        </button>
+                    )}
+                    {loading && <FontAwesomeIcon className={cx('loading')} icon={faSpinner} />}
+                    <button className={cx('search-btn')} onMouseDown={handleSubmit}>
+                        <SearchIcon />
+                    </button>
+                </div>
+            </HeadlesTippy>
+        </div>
     );
 }
 

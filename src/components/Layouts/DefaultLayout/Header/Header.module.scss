@@ -3,10 +3,15 @@
     --search-height: 46px;
     --search-top-space: 9px;
     --search-button-width: 52px;
-    width: 100%;
-    box-shadow: 0px 1px 1px rgb(0 0 0 / 12%);
-    height: var(--default-layout-header-height);
+    position: fixed;
+    z-index: 10;
+    top: 0;
+    left: 0;
     display: flex;
+    width: 100%;
+    height: var(--default-layout-header-height);
+    box-shadow: 0px 1px 1px rgb(0 0 0 / 12%);
+    background-color: var(--white);
     justify-content: center;
 }
 .inner {

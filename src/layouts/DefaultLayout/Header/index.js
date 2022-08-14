@@ -21,7 +21,7 @@ import Menu from '~/components/Proper/Menu';
 import { InboxIcon, MessageIcon, UploadIcon } from '~/components/Icons';
 import Image from '~/components/Image';
 import Search from '../Search';
-import routesConfig from '~/config/routes';
+import routesConfig from '~/config';
 
 const cx = classNames.bind(styles);
 const MENU_ITEMS = [
@@ -110,7 +110,7 @@ function Header() {
         <header className={cx('wrapper')}>
             <div className={cx('inner')}>
                 <div className={cx('logo')}>
-                    <Link to={routesConfig.home} className={cx('logo-link')}>
+                    <Link to={routesConfig.routes.home} className={cx('logo-link')}>
                         <img src={images.logo} alt="Tiktok"></img>
                     </Link>
                 </div>

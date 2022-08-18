@@ -21,7 +21,7 @@ function Search() {
 
     const inputRef = useRef();
 
-    const debounced = useDebounce(searchValue, 500);
+    const debouncedValue = useDebounce(searchValue, 500);
 
     const handleChange = (e) => {
         const searchValue = e.target.value;
@@ -36,7 +36,7 @@ function Search() {
     };
 
     useEffect(() => {
-        if (!debounced.trim()) {
+        if (!debouncedValue.trim()) {
             setSearchResults([]);
             return;
         }
@@ -44,12 +44,12 @@ function Search() {
         //Javascript API support browsers: XMLHttpRequest, fetch
         const fetchApi = async () => {
             setLoading(true);
-            const result = await searchService.search(debounced);
+            const result = await searchService.search(debouncedValue);
             setSearchResults(result);
             setLoading(false);
         };
         fetchApi();
-    }, [debounced]);
+    }, [debouncedValue]);
 
     const handleClear = () => {
         setSearchValue('');

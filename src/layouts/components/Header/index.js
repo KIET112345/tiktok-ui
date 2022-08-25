@@ -20,7 +20,7 @@ import Button from '~/components/Button';
 import Menu from '~/components/Proper/Menu';
 import { InboxIcon, MessageIcon, UploadIcon } from '~/components/Icons';
 import Image from '~/components/Image';
-import Search from '../Search';
+import Search from '~/layouts/components/Search';
 import routesConfig from '~/config';
 
 const cx = classNames.bind(styles);
